@@ -5,7 +5,7 @@ import { mobile } from "../responsive"
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("assets/images/register-bg.jpg") center center;
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("assets/images/login-bg.jpg") top center;
     background-size: cover;
     display: flex;
     justify-content: center;

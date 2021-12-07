@@ -27,6 +27,7 @@ const Title = styled.h1`
 const Form = styled.form`
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 15px;
 `
 
 const Input = styled.input`
@@ -51,6 +52,12 @@ const Button = styled.button`
     ${mobile({ width: '60%' })}
 `
 
+const Link = styled.a`
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+`
+
 const Register = () => {
     return (
         <Container>
@@ -66,6 +73,7 @@ const Register = () => {
                     <Agreement>By creating an account, I consent to the processing of my personal data in accordance with the <strong>PRIVACY POLICY</strong></Agreement>
                     <Button>CREATE ACCOUNT</Button>
                 </Form>
+                <Link>ALREADY HAVE AN ACCOUNT?</Link>
             </Wrapper>
         </Container>
     )
