@@ -24,18 +24,16 @@ const Title = styled.h2`
 
 const Categories = () => {
     return (
-        <>
-            <Container>
-                <Title>CATEGORY</Title>
-                <CategoryList>
-                    {
-                        categories.map(category => (
-                            <CategoryItem category={category} key={category.id} />
-                        ))
-                    }
-                </CategoryList>
-            </Container>
-        </>
+        <Container>
+            <Title>CATEGORY</Title>
+            <CategoryList>
+                {
+                    categories.map(category => (
+                        <CategoryItem category={category} key={category.id} />
+                    ))
+                }
+            </CategoryList>
+        </Container>
     )
 }
 
