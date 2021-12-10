@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { mobile } from "../responsive"
 
@@ -59,6 +60,11 @@ const Link = styled.a`
 `
 
 const Register = () => {
+    let navigate = useNavigate();
+
+    const changeRoute = () => {
+        navigate('/login')
+    }
     return (
         <Container>
             <Wrapper>
@@ -73,7 +79,7 @@ const Register = () => {
                     <Agreement>By creating an account, I consent to the processing of my personal data in accordance with the <strong>PRIVACY POLICY</strong></Agreement>
                     <Button>CREATE ACCOUNT</Button>
                 </Form>
-                <Link>ALREADY HAVE AN ACCOUNT?</Link>
+                <Link onClick={() => changeRoute()}>ALREADY HAVE AN ACCOUNT?</Link>
             </Wrapper>
         </Container>
     )

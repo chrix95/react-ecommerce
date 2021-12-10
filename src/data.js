@@ -25,27 +25,27 @@ export const sliderItems = [
 export const categories = [
     {
         id: 1,
-        img: "assets/images/category/category1.jpg",
+        img: "/assets/images/category/category1.jpg",
         title: "SHIRT STYLE!"
     },
     {
         id: 2,
-        img: "assets/images/category/category2.jpg",
+        img: "/assets/images/category/category2.jpg",
         title: "LOUNGEWARE LOVE"
     },
     {
         id: 3,
-        img: "assets/images/category/category3.jpg",
+        img: "/assets/images/category/category3.jpg",
         title: "LIGHT JACKETS"
     },
     {
         id: 4,
-        img: "assets/images/category/category4.png",
+        img: "/assets/images/category/category4.png",
         title: "SNOW WEARS"
     },
     {
         id: 5,
-        img: "assets/images/category/category5.jpg",
+        img: "/assets/images/category/category5.jpg",
         title: "WINTER WEARS"
     },
 ];
@@ -53,34 +53,34 @@ export const categories = [
 export const popularProducts = [
     {
         id: 1,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 2,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 3,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 4,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 5,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 6,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 7,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
     {
         id: 8,
-        img: "assets/images/products/product1.png",
+        img: "/assets/images/products/product1.png",
     },
 ];
