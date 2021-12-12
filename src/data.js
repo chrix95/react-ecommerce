@@ -26,27 +26,32 @@ export const categories = [
     {
         id: 1,
         img: "/assets/images/category/category1.jpg",
-        title: "SHIRT STYLE!"
+        title: "SHIRT STYLE!",
+        cat: "women"
     },
     {
         id: 2,
         img: "/assets/images/category/category2.jpg",
-        title: "LOUNGEWARE LOVE"
+        title: "LOUNGEWARE LOVE",
+        cat: "christmas"
     },
     {
         id: 3,
         img: "/assets/images/category/category3.jpg",
-        title: "LIGHT JACKETS"
+        title: "LIGHT JACKETS",
+        cat: "unisex"
     },
     {
         id: 4,
         img: "/assets/images/category/category4.png",
-        title: "SNOW WEARS"
+        title: "SNOW WEARS",
+        cat: "gift"
     },
     {
         id: 5,
         img: "/assets/images/category/category5.jpg",
-        title: "WINTER WEARS"
+        title: "WINTER WEARS",
+        cat: "men"
     },
 ];
 

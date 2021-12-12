@@ -4,6 +4,7 @@ import { Badge } from "@material-ui/core";
 import styled from 'styled-components'
 import { mobile } from '../responsive'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Container = styled.div`
     height: 60px;
@@ -50,7 +51,8 @@ const Center = styled.div`
 
 const Logo = styled.h1`
     font-weight: bold;
-    ${mobile({ fontSize: '24px' })}
+    ${mobile({ fontSize: '24px' })};
+    cursor: pointer;
 `
 
 const Right = styled.div`
@@ -71,6 +73,8 @@ const MenuItem = styled.div`
 const Navbar = () => {
     let navigate = useNavigate();
 
+    const { quantity } = useSelector(state => state.cart)
+
     const changeRoute = (location) => {
         navigate(`/${location}`)
     }
@@ -86,13 +90,13 @@ const Navbar = () => {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>LAMA.</Logo>
+                    <Logo onClick={() => changeRoute('')}>LAMA.</Logo>
                 </Center>
                 <Right>
                     <MenuItem onClick={() => changeRoute('register')}>REGISTER</MenuItem>
                     <MenuItem onClick={() => changeRoute('login')}>SIGN IN</MenuItem>
                     <MenuItem>
-                        <Badge badgeContent={4} color="primary">
+                        <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined />
                         </Badge>
                     </MenuItem>
