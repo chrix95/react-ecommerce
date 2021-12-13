@@ -5,6 +5,8 @@ import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import { Add, Remove } from '@material-ui/icons'
 import { mobile } from '../responsive'
+import { useSelector } from 'react-redux'
+import { currency } from '../functions'
 
 const Container = styled.div`
 `
@@ -53,6 +55,13 @@ const Bottom = styled.div`
 
 const Info = styled.div`
     flex: 3;
+`
+
+const EmptyCart = styled.div`
+    font-size: 20px;
+    text-align: center;
+    font-style: italic;
+    margin-top: 2rem;
 `
 
 const Product = styled.div`
@@ -161,6 +170,7 @@ const SummaryButton = styled.button`
 `
 
 const Cart = () => {
+    const { products, quantity, total } = useSelector(state => state.cart)
     return (
         <Container>
             <Navbar />
@@ -170,70 +180,57 @@ const Cart = () => {
                 <Top>
                     <TopButton>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
-                        <TopText>Shopping Bag (2)</TopText>
+                        <TopText>Shopping Bag ({ quantity })</TopText>
                         <TopText>Your Wishlist (0)</TopText>
                     </TopTexts>
                     <TopButton type="filled">CHECKOUT NOW</TopButton>
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product>
-                            <ProductDetail>
-                                <Image src="assets/images/cart-product.jpg" />
-                                <Details>
-                                    <ProductName><strong>Product:</strong> JESSIE THUNDER SHOE</ProductName>
-                                    <ProductId><strong>ID:</strong> 9893888273812</ProductId>
-                                    <ProductColor color= "black" />
-                                    <ProductSize><strong>Size:</strong> 37.5</ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Remove />
-                                    <ProductAmount>2</ProductAmount>
-                                    <Add />
-                                </ProductAmountContainer>
-                                <ProductPrice>$ 30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
-                        <Hr />
-                        <Product>
-                            <ProductDetail>
-                                <Image src="assets/images/cart-product.jpg" />
-                                <Details>
-                                    <ProductName><strong>Product:</strong> JESSIE THUNDER SHOE</ProductName>
-                                    <ProductId><strong>ID:</strong> 9893888273812</ProductId>
-                                    <ProductColor color= "black" />
-                                    <ProductSize><strong>Size:</strong> 37.5</ProductSize>
-                                </Details>
-                            </ProductDetail>
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <Remove />
-                                    <ProductAmount>2</ProductAmount>
-                                    <Add />
-                                </ProductAmountContainer>
-                                <ProductPrice>$ 30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
+                        {
+                            products.length > 0 ? products.map((product) => (
+                                <>
+                                    <Product key={product._id}>
+                                        <ProductDetail>
+                                            <Image src={product.img} />
+                                            <Details>
+                                                <ProductName><strong>Product:</strong> {product?.title}</ProductName>
+                                                <ProductId><strong>ID:</strong> {product?._id}</ProductId>
+                                                <ProductColor color={ product?.color || "N/A" } />
+                                                <ProductSize><strong>Size:</strong> { product && product.size ? product.size : "N/A" }</ProductSize>
+                                            </Details>
+                                        </ProductDetail>
+                                        <PriceDetail>
+                                            <ProductAmountContainer>
+                                                <Remove />
+                                                <ProductAmount>{ product.quantity }</ProductAmount>
+                                                <Add />
+                                            </ProductAmountContainer>
+                                            <ProductPrice>$ { currency(product.price) }</ProductPrice>
+                                        </PriceDetail>
+                                    </Product>
+                                    <Hr />
+                                </>
+                            )) : <EmptyCart>No item(s) in your shopping bag</EmptyCart>
+                        }
                     </Info>
                     <Summary>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ 80</SummaryItemPrice>
+                            <SummaryItemPrice>$ { currency(total) }</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Shipping</SummaryItemText>
-                            <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+                            <SummaryItemPrice>$ 0</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Shipping Discount</SummaryItemText>
-                            <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+                            <SummaryItemPrice>$ 0</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$ 80</SummaryItemPrice>
+                            <SummaryItemPrice>$ { currency(total) }</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryButton>CHECKOUT NOW</SummaryButton>
                     </Summary>

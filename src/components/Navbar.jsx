@@ -95,7 +95,7 @@ const Navbar = () => {
                 <Right>
                     <MenuItem onClick={() => changeRoute('register')}>REGISTER</MenuItem>
                     <MenuItem onClick={() => changeRoute('login')}>SIGN IN</MenuItem>
-                    <MenuItem>
+                    <MenuItem onClick={() => changeRoute('cart')}>
                         <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined />
                         </Badge>

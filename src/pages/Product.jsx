@@ -123,8 +123,8 @@ const Product = () => {
     const productId = location.pathname.split('/')[2]
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1)
-    const [color, setColor] = useState("null")
-    const [size, setSize] = useState("null")
+    const [color, setColor] = useState(null)
+    const [size, setSize] = useState(null)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -174,6 +174,7 @@ const Product = () => {
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize onChange={(e) => setSize(e.target.value)}>
+                                <FilterSizeOption value={null}>Select a color</FilterSizeOption>
                                 {product?.size?.map(s => (
                                     <FilterSizeOption key={s}>{capitalize(s)}</FilterSizeOption>
                                 ))}
