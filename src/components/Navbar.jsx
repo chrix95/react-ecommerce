@@ -4,7 +4,8 @@ import { Badge } from "@material-ui/core";
 import styled from 'styled-components'
 import { mobile } from '../responsive'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../redux/apiCalls'
 
 const Container = styled.div`
     height: 60px;
@@ -72,11 +73,17 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
     let navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const { currentUser } = useSelector(state => state.user);
     const { quantity } = useSelector(state => state.cart)
 
     const changeRoute = (location) => {
         navigate(`/${location}`)
+    }
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        logout(dispatch);
     }
 
     return (
@@ -93,8 +100,19 @@ const Navbar = () => {
                     <Logo onClick={() => changeRoute('')}>LAMA.</Logo>
                 </Center>
                 <Right>
-                    <MenuItem onClick={() => changeRoute('register')}>REGISTER</MenuItem>
-                    <MenuItem onClick={() => changeRoute('login')}>SIGN IN</MenuItem>
+                    {
+                        currentUser ? (
+                            <>
+                                <MenuItem onClick={(e) => e.preventDefault()}>DASHBOARD</MenuItem>
+                                <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+                            </>
+                        ) : (    
+                            <>
+                                <MenuItem onClick={() => changeRoute('register')}>REGISTER</MenuItem>
+                                <MenuItem onClick={() => changeRoute('login')}>SIGN IN</MenuItem>
+                            </>
+                        )
+                    }
                     <MenuItem onClick={() => changeRoute('cart')}>
                         <Badge badgeContent={quantity} color="primary">
                             <ShoppingCartOutlined />
