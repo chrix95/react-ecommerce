@@ -124,7 +124,7 @@ const ProductAmount = styled.div`
 `
 
 const ProductPrice = styled.div`
-    font-size: 30px;
+    font-size: ${props => props.type === "small" ? "22px" : "30px"};
     font-weight: 200;
     ${mobile({ marginBottom: '20px' })}
 `
@@ -206,7 +206,8 @@ const Cart = () => {
                                                 <ProductAmount>{ product.quantity }</ProductAmount>
                                                 <Add />
                                             </ProductAmountContainer>
-                                            <ProductPrice>$ { currency(product.price) }</ProductPrice>
+                                            <ProductPrice type="small"><sup>$ { currency(product.price) }</sup></ProductPrice>
+                                            <ProductPrice>$ { currency(product.price * product.quantity) }</ProductPrice>
                                         </PriceDetail>
                                     </Product>
                                     <Hr />
