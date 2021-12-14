@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess, logoutSuccess } from "./userRedux"
+import { loginFailure, loginStart, loginSuccess, logoutSuccess } from "./reducers/userReducer"
 import { publicRequest } from "../functions/axiosInstance"
 
 export const login = async (dispatch, user) => {

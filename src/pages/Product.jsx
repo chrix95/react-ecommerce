@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { publicRequest } from '../functions/axiosInstance'
 import { capitalize } from '../functions'
 import { useDispatch } from 'react-redux'
-import { addProduct } from '../redux/cartRedux'
+import { addProduct } from '../redux/reducers/cartReducer'
 
 const Container = styled.div`
 `
