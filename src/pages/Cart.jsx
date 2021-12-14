@@ -11,7 +11,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { publicRequest } from "../functions/axiosInstance";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeProduct } from "../redux/reducers/cartReducer";
+import { emptyProductCart, removeProduct } from "../redux/reducers/cartReducer";
 
 const Container = styled.div``;
 
@@ -40,6 +40,10 @@ const TopButton = styled.button`
   background-color: ${(props) =>
     props.type === "filled" ? "black" : "transparent"};
   color: ${(props) => props.type === "filled" && "white"};
+  &:disabled {
+    cursor: not-allowed;
+    color: grey;
+  }
 `;
 
 const TopTexts = styled.div`
@@ -62,7 +66,7 @@ const Info = styled.div`
   flex: 3;
 `;
 
-const EmptyCart = styled.div`
+const EmptyCartText = styled.div`
   font-size: 20px;
   text-align: center;
   font-style: italic;
@@ -94,7 +98,9 @@ const Details = styled.div`
 
 const ProductName = styled.span``;
 
-const ProductId = styled.span``;
+const ProductId = styled.span`
+  word-break: break-all;
+`;
 
 const ProductColor = styled.div`
   width: 20px;
@@ -167,6 +173,28 @@ const SummaryButton = styled.button`
   background-color: #000;
   color: #fff;
   font-weight: 600;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    color: grey;
+  }
+`;
+
+const TopInfo = styled.div`
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
+`
+
+const EmptyCart = styled.button`
+  width: auto;
+  padding: 10px;
+  background-color: #FFF;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
 `;
 
 
@@ -182,8 +210,12 @@ const Cart = () => {
   }
 
   const handleRemoveCart = (productId) => {
-    console.log(productId)
     dispatch(removeProduct(productId))
+  }
+
+  const handleEmptyCart = (e) => {
+    e.preventDefault();
+    dispatch(emptyProductCart())
   }
 
   useEffect(() => {
@@ -213,7 +245,7 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => navigate('/')}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag ({quantity})</TopText>
             <TopText>Your Wishlist (0)</TopText>
@@ -228,11 +260,16 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             >
-                <TopButton type="filled">CHECKOUT NOW</TopButton>
+              <TopButton type="filled" disabled={total === 0}>CHECKOUT NOW</TopButton>
             </StripeCheckout>
         </Top>
         <Bottom>
           <Info>
+            {products.length > 0 && (
+              <TopInfo>
+                <EmptyCart onClick={(e) => handleEmptyCart(e)}>Empty Shopping Bag</EmptyCart>
+              </TopInfo>
+            )}
             {products.length > 0 ? (
               products.map((product) => (
                 <>
@@ -274,7 +311,7 @@ const Cart = () => {
                 </>
               ))
             ) : (
-              <EmptyCart>No item(s) in your shopping bag</EmptyCart>
+              <EmptyCartText>No item(s) in your shopping bag</EmptyCartText>
             )}
           </Info>
           <Summary>
@@ -305,7 +342,7 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             >
-              <SummaryButton>CHECKOUT NOW</SummaryButton>
+              <SummaryButton disabled={total === 0}>CHECKOUT NOW</SummaryButton>
             </StripeCheckout>
           </Summary>
         </Bottom>
