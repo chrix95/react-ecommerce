@@ -8,7 +8,7 @@ import { Add, Remove } from '@material-ui/icons'
 import { mobile } from '../responsive'
 import { useLocation } from 'react-router-dom'
 import { publicRequest } from '../functions/axiosInstance'
-import { capitalize } from '../functions'
+import { capitalize, currency } from '../functions'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../redux/reducers/cartReducer'
 
@@ -47,7 +47,7 @@ const Price = styled.span`
 `
 
 const FilterContainer = styled.div`
-    width: 50%;
+    width: 70%;
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
@@ -82,7 +82,7 @@ const FilterSizeOption = styled.option`
 `
 
 const AddContainer = styled.div`
-    width: 50%;
+    width: 70%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -163,16 +163,16 @@ const Product = () => {
                 <InfoContainer>
                     <Title>{product.title}</Title>
                     <Description>{product.description}</Description>
-                    <Price>$ {product.price}</Price>
+                    <Price>$ {currency(product.price)}</Price>
                     <FilterContainer>
                         <Filter>
-                            <FilterTitle>Color</FilterTitle>
+                            <FilterTitle>Color:</FilterTitle>
                             {product?.color?.map(c => (
                                 <FilterColor key={c} color={c} onClick={() => setColor(c)} className={color === c && "activeColor"} />
                             ))}
                         </Filter>
                         <Filter>
-                            <FilterTitle>Size</FilterTitle>
+                            <FilterTitle>Size:</FilterTitle>
                             <FilterSize onChange={(e) => setSize(e.target.value)}>
                                 <FilterSizeOption value={null}>Select a color</FilterSizeOption>
                                 {product?.size?.map(s => (

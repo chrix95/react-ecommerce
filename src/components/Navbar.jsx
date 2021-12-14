@@ -9,6 +9,11 @@ import { logout } from '../redux/apiCalls'
 
 const Container = styled.div`
     height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: #FFF;
+    transition: all 0.5s ease-in-out;
     ${mobile({ height: '50px' })}
 `
 
