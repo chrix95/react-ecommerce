@@ -163,7 +163,7 @@ const Product = () => {
                 <InfoContainer>
                     <Title>{product.title}</Title>
                     <Description>{product.description}</Description>
-                    <Price>$ {currency(product.price)}</Price>
+                    <Price>$ {product.price && currency(product.price)}</Price>
                     <FilterContainer>
                         <Filter>
                             <FilterTitle>Color:</FilterTitle>
@@ -174,7 +174,7 @@ const Product = () => {
                         <Filter>
                             <FilterTitle>Size:</FilterTitle>
                             <FilterSize onChange={(e) => setSize(e.target.value)}>
-                                <FilterSizeOption value={null}>Select a color</FilterSizeOption>
+                                <FilterSizeOption value={null}>Select a size</FilterSizeOption>
                                 {product?.size?.map(s => (
                                     <FilterSizeOption key={s}>{capitalize(s)}</FilterSizeOption>
                                 ))}

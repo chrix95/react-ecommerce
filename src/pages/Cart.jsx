@@ -3,13 +3,15 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
-import { Add, Remove } from "@material-ui/icons";
+import { Add, CancelOutlined, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { currency } from "../functions";
 import StripeCheckout from "react-stripe-checkout";
 import { publicRequest } from "../functions/axiosInstance";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeProduct } from "../redux/reducers/cartReducer";
 
 const Container = styled.div``;
 
@@ -170,12 +172,18 @@ const SummaryButton = styled.button`
 
 const Cart = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const KEY = process.env.REACT_APP_STRIPE_KEY;
   const { products, quantity, total } = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null)
 
   const onToken = (token) => {
     setStripeToken(token)
+  }
+
+  const handleRemoveCart = (productId) => {
+    console.log(productId)
+    dispatch(removeProduct(productId))
   }
 
   useEffect(() => {
@@ -236,7 +244,7 @@ const Cart = () => {
                           <strong>Product:</strong> {product?.title}
                         </ProductName>
                         <ProductId>
-                          <strong>ID:</strong> {product?._id}
+                          <strong>ID:</strong> <Link to={`/product/${product._id}`}>{product?._id}</Link>
                         </ProductId>
                         <ProductColor color={product?.color || "N/A"} />
                         <ProductSize>
@@ -256,6 +264,9 @@ const Cart = () => {
                       </ProductPrice>
                       <ProductPrice>
                         $ {currency(product.price * product.quantity)}
+                      </ProductPrice>
+                      <ProductPrice>
+                        <CancelOutlined style={{ color: "red" }} onClick={() => handleRemoveCart(product._id)} />
                       </ProductPrice>
                     </PriceDetail>
                   </Product>
